@@ -3,9 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link type="text/css" href="/static/css/foundation.css" rel="stylesheet">
+    <link type="text/css" href="/static/css/foundation.min.css" rel="stylesheet">
 
 </head>
 <body>
+
+<nav class="top-bar topbar-responsive">
+  <div class="top-bar-title">
+    <span data-responsive-toggle="topbar-responsive" data-hide-for="medium">
+      <button class="menu" type="button" data-toggle></button>
+    </span>
+    <a class="topbar-responsive-logo" href="/"><strong>Single ToDoList for RubyGarage</strong></a>
+  </div>
+  <div id="topbar-responsive" class="topbar-responsive-links">
+    <div class="top-bar-right">
+      <ul class="menu simple vertical medium-horizontal">
+        <li><a href="/">Main</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+        <li>
+          <button form="{% url "auth:login" %}" type="button" class="button hollow topbar-responsive-button">Login({{ username }})</button>
+        </li>
+            {% if username %}
+            <li><a href="{% url "auth:logout" %}">Logout ({{ username }})</a></li>
+        {% else %}
+            <li>
+                <a href="{% url "auth:login" %}">Login</a>
+            </li>
+        {% endif %}
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% block task%}{% endblock %}
+{% block login %}{% endblock %}
 
 </body>
 </html>

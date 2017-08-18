@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ToDolist.apps.TodolistConfig',
+    'task',
+    'authuser',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +57,7 @@ ROOT_URLCONF = 'ToDolist_for_RG.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,4 +122,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),
+    '/home/morpheus/PycharmProjects/ToDolist_for_RG/static',)
+# List of finder classes that know how to find static files in
+# various locations.
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
+#TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)
