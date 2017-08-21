@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,7 @@
     <title>Title</title>
     <link rel="icon" href="/static/img/list.png" sizes="16x16 32х32 64x64" type="image/png">
     <link type="text/css" href="/static/css/foundation.css" rel="stylesheet">
+    <link type="text/css" href="/static/css/app.css" rel="stylesheet">
     <link type="text/css" href="/static/css/foundation.min.css" rel="stylesheet">
 
 </head>
@@ -25,28 +27,29 @@
               <li><a href="#">Contact</a></li>
 
               {% if username %}
-                  <li>
-                      <a href="{% url "auth:logout" %}">Logout ({{ username }})</a>
-                  </li>
-                  <li>
-                      <button form="{% url "auth:login" %}" type="button" class="button hollow topbar-responsive-button">Login({{ username }})</button>
-                  </li>
+                  <li><a href="{% url "auth:logout" %}">Logout ({{ username }})</a></li>
               {% else %}
-                  <li>
-                      <a href="{% url "auth:login" %}">Login</a>
-                  </li>
-                  <li>
-                      <button form="{% url "auth:login" %}" type="button" class="button hollow topbar-responsive-button">Login</button>
-                  </li>
+                  <li><a href="{% url "auth:login" %}">Login</a></li>
               {% endif %}
 
            </ul>
       </div>
   </div>
 </nav>
+<div class="grid-x grid-margin-x">
+    <div class="small-2 cell"></div>
+    <div class="auto cell">
+        {% if username %}
+            {% block task%}{% endblock %}
+        {% else %}
+            {% block index %}{% endblock %}
+        {% endif %}
 
-{% block task%}{% endblock %}
-{% block login %}{% endblock %}
+        {% block login %}{% endblock %}
+
+    </div>
+    <div class="auto cell"></div>
+</div>
 
 </body>
 </html>

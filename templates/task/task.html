@@ -4,40 +4,33 @@
 
 {% block task %}
     <div class="large-8 columns">
+        {% if username %}
         {% for task in tasks %}
-            <h4><a href="/tasks/get/{{ task.id }}" >{{ task.task_title }}</a></h4>
+            <h4>{{ task.task_title }}</h4>
             <h6>Дата публикации:{{ task.task_date }}</h6>
-            {% comment %}
-            <p><a href="/tasks/add_like/{{ article.id }}/"><img src="{% static 'like.png' %}" width="25px" height="25px" name="Likes"></a>{{ article.article_likes }}</p>
-            {% endcomment %}
+            <h6>Creator:{{ username }}</h6>
             <hr />
+            {% if username %}
+                <form action="/task/add_item/{{ task.id }}/" method="post">
+
+                    {% csrf_token %}
+                    {{ form_item }}
+                    <input type="submit" class="button" value="Add item" />
+                </form>
+            {% else %}
+
+                Plese registrate!
+
+            {% endif %}
+            <form>
+                <button class="button" type="submit" form="/add_task/{{ task_task.id }}">Add Task</button>
+            </form>
+
+
+
+
         {% endfor %}
+        {% endif %}
     </div>
-    {% comment %}
-    <div class="row">
-        <div class="large-3 large-offset-5 columns">
-            <ul class="pagination text-center" role="navigation" aria-label="Pagination">
-                {% if articles.has_previous %}
-                    <li class="pagination-previous"><a href="/articles/page/{{ articles.previous_page_number }}/">Previous</a></li>
-                {% else %}
-                    <li class="pagination-previous disabled"><a href="#">Previous</a></li>
-                {% endif %}
 
-                {% for page in articles.paginator.page_range %}
-                    {% if page == articles.number %}
-                        <li class="current"><a href="/articles/page/{{ page }}/">{{ page }}</a></li>
-                    {% else %}
-                        <li><a href="/articles/page/{{ page }}/">{{ page }}</a></li>
-                    {% endif %}
-                {% endfor %}
-
-                {% if articles.has_next %}
-                    <li class="pagination-next"><a href="/articles/page/{{ articles.next_page_number }}/">Next</a></li>
-                {% else %}
-                    <li class="pagination-next disabled"><a href="#">Next</a></li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
-    {% endcomment %}
 {% endblock %}
