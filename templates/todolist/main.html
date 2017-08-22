@@ -39,6 +39,13 @@
 <div class="grid-x grid-margin-x">
     <div class="small-2 cell"></div>
     <div class="auto cell">
+    <div class="callout secondary">
+        <h1>Welcome to the Prototype App</h1>
+        <h3>This is the home page for the TODO application.</h3>
+        <button><a href="{% url "auth:register" %}" class="alert button right">Registration</a></button>
+
+
+    </div>
         {% if username %}
             {% block task%}{% endblock %}
         {% else %}
