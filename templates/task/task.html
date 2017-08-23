@@ -12,48 +12,22 @@
             <h4>{{ task.task_title }}</h4>
             <h6>Дата публикации:{{ task.task_date }}</h6>
             <h6>Creator:{{ username }}</h6>
-            <hr />
+
             {% if username %}
                 <form action="/task/add_item/{{ task.id }}/" method="post" class="form">
-                    {% csrf_token %}
-{#                    {% bootstrap_form form %}#}
-{#                    {% buttons %}#}
-{#                        <button type="submit" class="btn btn-primary">#}
-{#                            {% bootstrap_icon "star" %} Submit#}
-{#                        </button>#}
-{#                    {% endbuttons %}#}
-                    {% comment %}
-                    {% endcomment %}
-                    {{ ItemForm.as_p }}
-
                     <div class="input-group">
-                        <span class="input-group-label">{{ task_item.id }}</span>
-                            <input class="input-group-field" type="text">
-                        <div class="input-group-button">
-                            <input type="submit" class="button" value="Add item">
+                    {% csrf_token %}
+                    {{ ItemForm }}
+                    <span class="input-group-label">{{ task_item.id }}</span>
+                        <div class="input-group-button"><input class="input-group-field" type="text">
+                            <input type="submit" class="button" value="+">
                         </div>
                     </div>
                 </form>
             </div>
+            <hr />
             {% else %}
-
-
-
-                {# Display a form #}
-
-<form action="/url/to/submit/" method="post" class="form">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    {% buttons %}
-        <button type="submit" class="btn btn-primary">
-            {% bootstrap_icon "star" %} Submit
-        </button>
-    {% endbuttons %}
-</form>
-
-
                 Plese registrate!
-
             {% endif %}
 
         {% endfor %}

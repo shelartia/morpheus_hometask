@@ -3,6 +3,10 @@ from django.shortcuts import render, render_to_response
 
 
 def start(request):
-    return render_to_response('todolist/base.html')
+    context = {
+        'title': 'TODO List title',
+
+    }
+    return render_to_response('todolist/base.html', context)
 
 

@@ -9,14 +9,16 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="{% static "img/list.png" %}">
 
-    <title>Starter Template for Bootstrap</title>
+    <title>{{ title }}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static "/css/bootstrap.css" %}" rel="stylesheet">
     <link href="{% static "/css/bootstrap.min.css" %}" rel="stylesheet">
     <link href="{% static "/css/bootstrap-theme.css" %}" rel="stylesheet">
+    <script src="https://cdn.jsdeliver.net/g/jquery@1.9.1,bootstrap@3.3.6"></script>
+
 
   </head>
 <body>
@@ -26,19 +28,21 @@
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Single TODO list for RG</a>
+        <nav class="navbar navbar-light bg-faded">
+          <a class="navbar-brand" href="#">
+            <img src="{% static "img/list.png" %}" width="18" height="18" class="d-inline-block align-top" alt=""></a>
+          <a class="navbar-brand" href="#">Single TODO list for RG</a>
+            </nav>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li class="active"><a href="{% url "task:all_tasks_user" %}">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li><a href="#contact"></a></li>
+          <li> _______________________________________________ </li>
           {% if username %}
-            <li><a href="{% url "auth:logout" %}" class="navbar-link pull-right">Login ({{ username }})</a></li>
+            <li><a href="{% url "auth:logout" %}" class="navbar-link pull-right">Logout user "{{ username }}"</a></li>
           {% else %}
             <li><a href="{% url "auth:login" %}" class="navbar-link pull-right">Sing up</a></li>
           {% endif %}
@@ -46,6 +50,8 @@
     </div>
   </div>
  </nav>
+<br>
+<br>
 <br>
 <br>
 <br>
