@@ -3,6 +3,6 @@ from django.shortcuts import render, render_to_response
 
 
 def start(request):
-    return render_to_response('todolist/index.html')
+    return render_to_response('todolist/base.html')
 
 

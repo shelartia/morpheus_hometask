@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'ToDolist.apps.TodolistConfig',
     'task',
     'authuser',
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -124,12 +125,12 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),
     '/home/morpheus/PycharmProjects/ToDolist_for_RG/static',)
+
 # List of finder classes that know how to find static files in
 # various locations.
 
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-)
+# STATICFILES_FINDERS = (
+#     'django.contrib.staticfiles.finders.FileSystemFinder',
+#     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+# )
 
-#TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)

@@ -1,6 +1,8 @@
-{% extends 'todolist/main.html' %}
+{% extends 'todolist/base.html' %}
 
 {% load staticfiles %}
+{% load bootstrap3 %}
+
 
 {% block task %}
     <div class="large-8 columns">
@@ -12,11 +14,15 @@
             <h6>Creator:{{ username }}</h6>
             <hr />
             {% if username %}
-                <form action="/task/add_item/{{ task.id }}/" method="post">
-                    {% comment %}
-
-
+                <form action="/task/add_item/{{ task.id }}/" method="post" class="form">
                     {% csrf_token %}
+{#                    {% bootstrap_form form %}#}
+{#                    {% buttons %}#}
+{#                        <button type="submit" class="btn btn-primary">#}
+{#                            {% bootstrap_icon "star" %} Submit#}
+{#                        </button>#}
+{#                    {% endbuttons %}#}
+                    {% comment %}
                     {% endcomment %}
                     {{ ItemForm.as_p }}
 
@@ -31,6 +37,21 @@
             </div>
             {% else %}
 
+
+
+                {# Display a form #}
+
+<form action="/url/to/submit/" method="post" class="form">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">
+            {% bootstrap_icon "star" %} Submit
+        </button>
+    {% endbuttons %}
+</form>
+
+
                 Plese registrate!
 
             {% endif %}
@@ -40,20 +61,15 @@
     <br>
         <div class="input-group">
             <span class="input-group-label menu">TODO Title:</span>
+            <form action="/task/add_task/{{ task.id }}/" method="post">
+                {% csrf_token %}
                 <input class="input-group-field" type="text">
-                <div class="input-group-button">
-                <input type="submit" class="button" value="Add TODO List">
-                </div>
-        </div>
-    {% comment %}
-
-
-                    {% csrf_token %}
-
-            <form action="/task/add_task/{{ task.id }}">
-                <button class="button" type="submit" form="/add_task/{{ task.id }}">Add TODO List</button>
+                    <div class="input-group-button">
+                        <input type="submit" class="button" value="Add TODO List">
+                    </div>
             </form>
-            {% endcomment %}
+        </div>
+
     </div>
 
 {% endblock %}

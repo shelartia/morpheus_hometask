@@ -31,21 +31,32 @@ def tasks(request):
 #     return render_to_response('articles/article/article.html', args)
 
 
+# def task(request, task_id=None):
+#     task = get_object_or_404(Task, id=task_id)
+#     tasks = Task_items.objects.all()
+#     form_item = TaskForm
+#
+#     context = {
+#         'article': Task.objects.get(id=task_id),
+#         'items': Task_items.objects.filter(items_task_id=task_id),
+#         'form_task': form_item,
+#         'username': auth.get_user(request).username,
+#     }
+#
+#     template = 'task/task.html'
+#
+#     return render(request, template, context)
+
+
 def task(request, task_id=None):
-    task = get_object_or_404(Task, id=task_id)
-    tasks = Task_items.objects.all()
-    form_item = TaskForm
-
-    context = {
-        'article': Task.objects.get(id=task_id),
-        'items': Task_items.objects.filter(items_task_id=task_id),
-        'form_task': form_item,
-        'username': auth.get_user(request).username,
-    }
-
-    template = 'task/task.html'
-
-    return render(request, template, context)
+    item_form = TaskForm
+    args = {}
+    args.update(csrf(request))
+    args['task'] = Task.objects.get(id=task_id)
+    args['comments'] = Task_items.objects.filter(item_task_id=task_id)
+    args['form'] = item_form
+    args['username'] = auth.get_user(request).username
+    return render_to_response('task/task.html', args)
 
 
 def add_task(request, task_id):
@@ -61,20 +72,20 @@ def add_task(request, task_id):
 
 
 def add_item(request, task_id):
-    if request.POST and ("pause" not in request.session):
+    if request.POST: #and ("pause" not in request.session):
         form = ItemForm(request.POST)
         if form.is_valid():
-            args={}
-            args.update(csrf(request))
+            #args = {}
+            #args.update(csrf(request))
             item = form.save(commit=False)
             item.item_task = Task.objects.get(id=task_id)
             form.save()
-            request.session.set_expiry(3) # time pause
-            request.session['pause'] = True
-            args['form'] = form
-    #return redirect('/task/item/%s/' % task_id)
+            #request.session.set_expiry(3) # time pause
+            #request.session['pause'] = True
+            #args['form'] = form
+    return redirect('/task/item/%s/' % task_id)
     #return render_to_response('task/task.html', args)
-    return render('/')
+    #return render('/')
 
 # def article(request, article_id=1):
 #     comment_form = CommentForm
