@@ -15,18 +15,18 @@ def start(request):
 def tasks(request):
     username = auth.get_user(request)
     all_user_tasks = Task.objects.filter(task_creator__username=username)
-    print(all_user_tasks)
     for task_id in all_user_tasks:
         task_item = Task_items.objects.filter(item_task_id=task_id)
         print('Task ID = ', task_id, 'Items = ', task_item)
         for i in task_item:
-            item = Task_items.objects.filter(item_task_id=task_id)
+
+            #item = Task_items.objects.filter(item_task_id=i)
             print(i)
 
     return render_to_response('task/task.html', {
             'tasks': all_user_tasks,
             'username': auth.get_user(request).username, # Получаем юзера из реквеста
-            'item': item,
+            'item': task_item,
         })
 
 
