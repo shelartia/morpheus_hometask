@@ -1,4 +1,3 @@
-#from django.core.paginator import Paginator
 from django.shortcuts import render, render_to_response, get_object_or_404, redirect
 from django.contrib import auth
 from task.models import Task, Task_items
@@ -15,36 +14,35 @@ def start(request):
 def tasks(request):
     username = auth.get_user(request)
     all_user_tasks = Task.objects.filter(task_creator__username=username)
+    i = 0
     for task_id in all_user_tasks:
         task_item = Task_items.objects.filter(item_task_id=task_id)
-        print('Task ID = ', task_id, 'Items = ', task_item)
-        for i in task_item:
 
-            #item = Task_items.objects.filter(item_task_id=i)
-            print(i)
+        print('Task ID = ', task_id, 'Items = ', task_item )
 
     return render_to_response('task/task.html', {
             'tasks': all_user_tasks,
+            'items': task_item,
             'username': auth.get_user(request).username, # Получаем юзера из реквеста
-            'item': task_item,
+            #'item': task_item,
         })
 
 
-# def task(request, task_id=None):
-#     task = get_object_or_404(Task, id=task_id)
-#     tasks = Task_items.objects.all()
-#     form_item = TaskForm
-#
-#     context = {
-#         'article': Task.objects.get(id=task_id),
-#         'items': Task_items.objects.filter(items_task_id=task_id),
-#         'form_task': form_item,
-#         'username': auth.get_user(request).username,
-#     }
-#
-#     template = 'task/task.html'
-#
-#     return render(request, template, context)
+def task(request, task_id=None):
+    task = get_object_or_404(Task, id=task_id)
+    tasks = Task_items.objects.all()
+    form_item = TaskForm
+
+    context = {
+        'article': Task.objects.get(id=task_id),
+        'items': Task_items.objects.filter(items_task_id=task_id),
+        'form_task': form_item,
+        'username': auth.get_user(request).username,
+    }
+
+    template = 'task/task.html'
+
+    return render(request, template, context)
 
 
 def task(request, task_id=None):

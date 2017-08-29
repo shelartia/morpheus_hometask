@@ -1,0 +1,31 @@
+{% extends "todolist/base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+    {{ name }}
+{% endblock %}
+
+{% block content_article %}
+    <h4>Дата публикации:{{ article.article_date }}</h4>
+    <h2>{{ article.article_title }}</h2>
+    <p>{{ article.article_text }}</p>
+    <hr>
+
+    {% for comment in comments %}
+
+        <h6>Дата публикации:{{ comment.comments_date }}</h6>
+        <h4><p>{{ comment.comments_text }}</p></h4>
+
+    {% endfor %}
+    {% if username %}
+    <form action="/articles/add_comment/{{ article.id }}/" method="post">
+
+        {% csrf_token %}
+        {# {{ form.as_p }} #}
+        {# {{ form.comments_text}} #}
+        {{ form_comments.as_p }}
+        <input type="submit" class="button" value="Добавить комментарий" />
+    </form>
+    {% endif %}
+{% endblock %}
