@@ -40,8 +40,8 @@
         <li class="active"><a href="{% url "task:all_tasks_user" %}">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li><a href="/article/">Article</a></li>
-          <li> _______________________________________________ </li>
+          <li><a href="{% url "article:articles_all" %}">Article</a></li>
+          <li> ___________________________ </li>
           {% if username %}
             <li><a href="{% url "auth:logout" %}" class="navbar-link pull-right">Logout user "{{ username }}"</a></li>
           {% else %}
@@ -60,19 +60,25 @@
   <div class="container">
     <div class="">
     {% if username %}
-    {% block task%}{% endblock %}
+        {% block task%}{% endblock %}
+        {% block content_article %}{% endblock %}
     {% else %}
+
     <div class=""></div>
-      <div class="">
-        <div class="">
-          <h1>Welcome to the Prototype App</h1>
-          <h3>This is the home page for the TODO application.</h3>
-          <button><a href="{% url "auth:login" %}" class="">Sing up</a></button>
+      <div class="card" style="width: 50rem ; background-color: #9acfea">
+        <div class="card-block">
+          <h1 class="card-title">Welcome to the Prototype App</h1>
+          <h3 class="card-text">This is the home page for the TODO application.</h3>
+          <a href="{% url "auth:login" %}" class="btn btn-primary">Sing up</a>
         </div>
         <div class=""></div>
       </div>
-      {% block login %}{% endblock %}
+
+        {% block login %}{% endblock %}
+
       {% endif %}
+
+
     </div>
   </div>
 

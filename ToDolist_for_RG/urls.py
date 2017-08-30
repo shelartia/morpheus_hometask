@@ -20,7 +20,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^task/', include('task.urls', namespace='task')),
     url(r'^auth/', include('authuser.urls', namespace='auth')),
-    url(r'^start/', include('ToDolist.urls')),
+    #url(r'^start/', include('ToDolist.urls')),
     url(r'^article/', include('article.urls', namespace='article')),
     url(r'^', include('task.urls')),
 ]

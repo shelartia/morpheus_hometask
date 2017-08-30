@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.utils import timezone
 # Create your models here.
 
 
@@ -12,6 +14,7 @@ class Article(models.Model): # Статья
     article_text = models.TextField(verbose_name='Текст статьи', max_length=800, null=True, blank=True)
     article_date = models.DateTimeField(verbose_name='Добавлена')
     article_likes = models.IntegerField(default=0, editable=False) # editable - скрывает поле в админке
+    article_creator = models.ForeignKey(User)
 
     def __str__(self):
         return self.article_title

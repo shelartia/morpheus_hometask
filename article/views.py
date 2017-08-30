@@ -23,7 +23,7 @@ def articles(request, page_number=1):
     all_article = Article.objects.all() # Передаю в переменную все статьи
     current_page = Paginator(all_article, 3) # Передача пагинатору всех статей и вывод 3 на страницу
     return render_to_response('article/articles.html', {
-        #'articles': Article.objects.all(), # Получаем все обьекты Статей
+        #'article': Article.objects.all(), # Получаем все обьекты Статей
         'articles': current_page.page(page_number),
         'username': auth.get_user(request).username, # Получаем юзера из реквеста
     })
@@ -78,6 +78,6 @@ def add_comment(request, article_id):
             comment = form.save(commit=False)
             comment.comments_article = Article.objects.get(id=article_id)
             form.save()
-            request.session.set_expiry(1200) # Создает сессию и хранит ее 20 мин. 00 сек.
+            request.session.set_expiry(10) # Создает сессию и хранит ее 0 мин. 10 сек.
             request.session['pause'] = True # Пауза сессии
     return redirect('/article/get/%s' % article_id)

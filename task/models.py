@@ -12,7 +12,7 @@ class Task(models.Model):
     task_title = models.CharField(verbose_name='Title', max_length=60)
     task_date = models.DateTimeField(verbose_name='Add', auto_created=True)
     task_update = models.DateTimeField(verbose_name='UpDating', auto_now_add=True)
-    task_creator = models.ManyToManyField(User, auto_created=User.is_active)
+    task_creator = models.OneToOneField(User, auto_created=User.is_active)
 
     def __str__(self):
         return self.task_title
