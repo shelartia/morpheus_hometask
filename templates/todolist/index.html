@@ -1,0 +1,161 @@
+{% extends 'todolist/base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block index %}
+<div class="todolist">
+    <h2>Todo Items:</h2>
+
+
+
+
+{#    <!--<ul>-->#}
+{#        <!--{% for todo in todos %}-->#}
+{#        <!--<li>-->#}
+{#            <!--<a href="/todos/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}-->#}
+{#            <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->#}
+{#            <!--<a class='edit' href="/todos/edit/{{todo.id}}">|Edit</a>-->#}
+{#            <!--<a class='delete' href="/todos/delete/{{todo.id}}">|Delete</a>-->#}
+{#            <!--<a class='finished' href="/todos/finished/{{todo.id}}">|Finished</a>-->#}
+{#            <!--{% if todo.priority == 1 %}-->#}
+{#               <!--<font color="red" class="importance">&#45;&#45;Urgent</font>-->#}
+{#            <!--{% endif %}-->#}
+{#            <!--{% if todo.priority == 2 %}-->#}
+{#               <!--<font color="blue" class="importance">&#45;&#45;Caution</font>-->#}
+{#            <!--{% endif %}-->#}
+{#            <!--{% if todo.priority == 3 %}-->#}
+{#               <!--<font color="black" class="importance">&#45;&#45;Smooth</font>-->#}
+{#            <!--{% endif %}-->#}
+{#            <!--<br>-->#}
+{#            <!--<font color="red" class="ddl_tag">Deadline:{{todo.deadline}}</font>-->#}
+{#        <!--</li>-->#}
+{#        <!--{% endfor %}-->#}
+{#    <!--</ul>-->#}
+    <div class="alert alert-info" role="alert">
+      <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+
+    <table width="1000" border="0">
+        <tr>
+            <th>Title</th>
+            <th>content</th>
+            <th>Operation</th>
+            <th>Status</th>
+            <th>Deadline</th>
+
+        </tr>
+        {% for todo in todos %}
+        <tr>
+            <th><a class="btn btn-primary" href="/todolist/details/{{todo.id}}/" role="button">{{todo.title}}</a></th>
+            <th>{{todo.text}}</th>
+            <th width="190px">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <a href="/todolist/edit/{{todo.id}}/" type="button" class="btn btn-secondary btn-info">Edit</a>
+                  <a href="/todolist/delete/{{todo.id}}/" type="button" class="btn btn-secondary btn-danger">Delite</a>
+                  <a href="/todolist/finished/{{todo.id}}/" type="button" class="btn btn-secondary btn-success">Finished</a>
+
+                </div>
+            </th>
+            <th>
+                {% if todo.priority == 1 %}
+                   <font color="red" class="importance">Urgent</font>
+                {% endif %}
+                {% if todo.priority == 2 %}
+                   <font color="blue" class="importance">Caution</font>
+                {% endif %}
+                {% if todo.priority == 3 %}
+                   <font color="green" class="importance">Smooth</font>
+                {% endif %}
+            </th>
+            <th><font color="red" class="ddl_tag">{{todo.deadline}}</font></th>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+    <br><hr>
+</div>
+
+<div class="finishedlist">
+    <h2>Finished Items:</h2>
+    <!--<ul>-->
+        <!--{% for todo in finishedtodos %}-->
+        <!--<li>-->
+        <!--<a href="/todos/details/{{todo.id}}">{{todo.title}}</a>: {{todo.text}}-->
+        <!--<a class='edit' href="/todos/edit/{{todo.id}}">|Edit</a>-->
+        <!--<a class='delete' href="/todos/delete/{{todo.id}}">|Delete</a>-->
+        <!--<a class='finished' href="/todos/finished/{{todo.id}}">|Unfinished</a>-->
+        <!--<br>-->
+        <!--<font color="red" class="ddl_tag">Finished at: {{todo.finished_at}}</font>-->
+        <!--</li>-->
+        <!--{% endfor %}-->
+    <!--</ul>-->
+    <table width="800" border="1">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>content</th>
+                <th>Operation</th>
+                <th>Finished Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for todo in finishedtodos %}
+            <tr>
+                <th>
+                    <a href="/todos/details/{{todo.id}}">{{todo.title}}</a>
+                </th>
+                <th>{{todo.text}}</th>
+                <th>
+                    <a class='edit' href="/todos/edit/{{todo.id}}">|Edit</a>
+                    <a class='delete' href="/todos/delete/{{todo.id}}">|Delete</a>
+                    <a class='finished' href="/todos/finished/{{todo.id}}">|Unfinished</a>
+                </th>
+                <th>
+                    <font color="red" class="ddl_tag">{{todo.finished_at}}</font>
+                </th>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+<!--<script type="text/javascript">-->
+    <!--$(function(){-->
+        <!--var $table=$('table');-->
+        <!--var currentPage=0;-->
+        <!--var pageSize=2;-->
+        <!--$table.bind('paging',function(){-->
+            <!--$tabel.find('tbody tr').hide.slice(currentPage*pageSize,(currentPage+1)*pageSize).show();-->
+        <!--});-->
+    <!--var sumRows=$table.find('tbody tr').length;-->
+    <!--var sumPages=Math.ceil(sumRows/pageSize);-->
+    <!--var $pager=$('<div class="page"></div>');-->
+    <!--for(var pageIndex=0;pageIndex<sumPages;pageIndex++){-->
+        <!--$('<a href="#"><span>'+(pageIndex+1)+'</span></a>').bind("click",{"newPage":pageIndex}, function(event){-->
+            <!--currentPage=event.data["newPage"];-->
+            <!--$table.trigger("paging");-->
+        <!--}).appendTo($pager);-->
+        <!--$pager.append(" ");-->
+    <!--}-->
+    <!--$pager.insertAfter($table);-->
+    <!--$table.trigger("paging");-->
+    <!--});-->
+<!--</script>-->
+
+    <div class="alert alert-success" role="alert">
+  <strong>Well done!</strong> You successfully read this important alert message.
+</div>
+<div class="alert alert-info" role="alert">
+  <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+</div>
+<div class="alert alert-warning" role="alert">
+  <strong>Warning!</strong> Better check yourself, you're not looking too good.
+</div>
+<div class="alert alert-danger" role="alert">
+  <strong>Oh snap!</strong> Change a few things up and try submitting again.
+</div>
+
+
+
+{% endblock %}
+{% comment %}
+{% include 'todolist/partials/footer.html' %}
+{% endcomment %}

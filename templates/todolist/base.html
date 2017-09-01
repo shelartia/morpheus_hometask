@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="MorpheusFR">
     <link rel="icon" href="{% static "img/list.png" %}">
 
     <title>{{ title }}</title>
@@ -18,65 +18,72 @@
     <link href="{% static "/css/bootstrap.min.css" %}" rel="stylesheet">
     <link href="{% static "/css/bootstrap-theme.css" %}" rel="stylesheet">
     <script src="https://cdn.jsdeliver.net/g/jquery@1.9.1,bootstrap@3.3.6"></script>
+    <script src="{% static "/js/vendor/jquery.js" %}"></script>
+    <script src="{% static "/js/bootstrap.min.js" %}"></script>
+    <!-- Подключения скрипта control-modal.min.js к странице -->
+    <script src="js/control-modal.min.js"></script>
 
 
   </head>
 <body background="{% static "img/blur1.jpg" %}" >
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-      </button>
-        <nav class="navbar navbar-light bg-faded">
-          <a class="navbar-brand" href="#">
-            <img src="{% static "img/list.png" %}" width="18" height="18" class="d-inline-block align-top" alt=""></a>
-            <a class="navbar-brand" href="#">Single TODO list for RG</a>
-            </nav>
-    </div>
-    <div id="navbar" class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="{% url "task:all_tasks_user" %}">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="{% url "article:articles_all" %}">Article</a></li>
-          <li> ___________________________ </li>
-          {% if username %}
-            <li><a href="{% url "auth:logout" %}" class="navbar-link pull-right">Logout user "{{ username }}"</a></li>
-          {% else %}
-            <li><a href="{% url "auth:login" %}" class="navbar-link pull-right">Sing up</a></li>
-          {% endif %}
-      </ul>
-    </div>
-  </div>
- </nav>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-  <div class="container">
+{#<nav class="navbar navbar-inverse navbar-fixed-top">#}
+{#  <div class="container">#}
+{#    <div class="navbar-header">#}
+{#      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">#}
+{#        <span class="sr-only">Toggle navigation</span>#}
+{#        <span class="icon-bar"></span>#}
+{#      </button>#}
+{#        <nav class="navbar navbar-light bg-faded">#}
+{#          <a class="navbar-brand" href="#">#}
+{#            <img src="{% static "img/list.png" %}" width="18" height="18" class="d-inline-block align-top" alt=""></a>#}
+{#            <a class="navbar-brand" href="/">Single TODO list for RG</a>#}
+{#            </nav>#}
+{#    </div>#}
+{#    <div id="navbar" class="collapse navbar-collapse">#}
+{#      <ul class="nav navbar-nav">#}
+{#        <li class="active"><a href="#">Home</a></li>#}
+{#          <li><a href="#">About</a></li>#}
+{#          <li><a href="#">Contact</a></li>#}
+{#          <li> ___________________________ </li>#}
+{#          {% if username %}#}
+{#            <li><a href="{% url "auth:logout" %}" class="navbar-link pull-right">Logout user "{{ username }}"</a></li>#}
+{#          {% else %}#}
+{#            <li><a href="{% url "auth:login" %}" class="navbar-link pull-right">Sing up</a></li>#}
+{#          {% endif %}#}
+{#      </ul>#}
+{#    </div>#}
+{#  </div>#}
+{#</nav>#}
+ <div class="container">
     <div class="">
-    {% if username %}
-        {% block task%}{% endblock %}
-        {% block content_article %}{% endblock %}
-    {% else %}
+    <header id="main_header">
+      <h1>TodoList</h1>
+        <a href="{% url "todolist:add" %}" class="btn btn-default">Add Todo</a>
+        <hr>
+    </header>
 
-    <div class=""></div>
-      <div class="card" style="width: 50rem ; background-color: #9acfea">
-        <div class="card-block">
-          <h1 class="card-title">Welcome to the Prototype App</h1>
-          <h3 class="card-text">This is the home page for the TODO application.</h3>
-          <a href="{% url "auth:login" %}" class="btn btn-primary">Sing up</a>
-        </div>
-        <div class=""></div>
-      </div>
 
-        {% block login %}{% endblock %}
 
-      {% endif %}
+
+
+    {% block index%}{% endblock %}
+    {% block add %}{% endblock %}
+    {% block details %}{% endblock %}
+    {% block edit %}{% endblock %}
+
+
+
+{#    <div class=""></div>#}
+{#      <div class="card" style="width: 50rem ; background-color: #9acfea">#}
+{#        <div class="card-block">#}
+{#          <h1 class="card-title">Welcome to the Prototype App</h1>#}
+{#          <h3 class="card-text">This is the home page for the TODO application.</h3>#}
+{#          <a href="{% url "auth:login" %}" class="btn btn-primary">Sing up</a>#}
+{#        </div>#}
+{#        <div class=""></div>#}
+{#      </div>{% block login %}{% endblock %}#}
+{#        #}
+
 
 
     </div>

@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ToDolist.apps.TodolistConfig',
-    'task',
+    #'task',
     'authuser',
-    'article',
+    #'article',
     'bootstrap3',
 ]
 

@@ -1,0 +1,12 @@
+{% extends 'todolist/base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block details %}
+    <a href="{% url "todolist:index" %}"><< Go Back</a>
+    <br>
+    <h1>{{todo.title}}</h1>
+    <p>{{todo.text}}</p>
+    <br>
+    Created on {{todo.created_at}}
+{% endblock %}

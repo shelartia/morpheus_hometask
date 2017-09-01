@@ -18,9 +18,12 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^task/', include('task.urls', namespace='task')),
     url(r'^auth/', include('authuser.urls', namespace='auth')),
-    #url(r'^start/', include('ToDolist.urls')),
-    url(r'^article/', include('article.urls', namespace='article')),
-    url(r'^', include('task.urls')),
+    url(r'^todolist/', include('ToDolist.urls')),
+    url(r'^', include('ToDolist.urls', namespace='todolist')),
+
+    # url(r'^task/', include('task.urls', namespace='task')),
+    # url(r'^start/', include('ToDolist.urls')),
+    # url(r'^article/', include('article.urls', namespace='article')),
+
 ]

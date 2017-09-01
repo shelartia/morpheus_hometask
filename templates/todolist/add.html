@@ -1,0 +1,46 @@
+{% extends 'todolist/base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block add %}
+    <form action="{% url "todolist:add" %}" method="post">
+    {% csrf_token %}
+    <div class="col-lg-8">
+        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon">Title task</div>
+            <input type="text" class="form-control" id="title" name="title" placeholder="Title" />
+        </div>
+        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon">Text task</div>
+            <input type="text" class="form-control" id="text" name="text" placeholder="Text" />
+        </div>
+        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon">DeadLine task</div>
+            <input type="date" class="form-control" name="deadlinea" id="deadlinea example-datetime-local-input" placeholder="Chose date" />
+        </div>
+    <fieldset class="form-group">
+    <legend>Importance:</legend>
+    <div class="form-check">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="priority" id="optionsRadios1" value="1" {% if not todo.priority or todo.priority == 1 %} checked {% endif %}>
+        <span class="btn btn-danger btn-xs">Urgent</span>
+      </label>
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="priority" id="optionsRadios1" value="2" {% if todo.priority == 2 %} checked {% endif %}>
+        <span class="btn btn-warning btn-xs">Caution</span>
+      </label>
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="priority" id="optionsRadios1" value="3" {% if todo.priority == 3 %} checked {% endif %}>
+        <span class="btn btn-success btn-xs">Smooth</span>
+      </label>
+    </div>
+    </fieldset>
+    </div>
+
+        <br><br>
+        <input type="submit" class="btn btn-primary" value="Submit"/>
+    </form>
+    <br>
+    <a href="{% url "todolist:index" %}">Go Back</a>
+
+{% endblock %}
